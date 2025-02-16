@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate();
   return (
     <div className="bg-bg">
       <div>
@@ -14,10 +15,10 @@ function Main() {
           <p>Completed Tasks</p>
         </div>
         <div>
-          <Link to="/task/1">Task</Link>
-          <p>12 Tasks</p>
-          <Link to="/boards">Boards</Link>
-          <p>3 Boards</p>
+          <button onClick={() => navigate("/task/1")}>View Task</button>
+
+          <button onClick={() => navigate("/boards")}>Boards</button>
+
           <button>Active</button>
           <button>Done</button>
         </div>
