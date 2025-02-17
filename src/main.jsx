@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import Boards from "./pages/Boards.jsx";
 import TaskDetails from "./pages/TaskDetails.jsx";
-import AddTask from "./pages/AddTask.jsx";
+import TaskForm from "./components/TaskForm.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/" element={<App />} />
         <Route path="/boards" element={<Boards />} />
         <Route path="/task/:id" element={<TaskDetails />} />
-        <Route path="/addTask" element={<AddTask />} />
+        <Route path="/addTask" element={<TaskForm />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
