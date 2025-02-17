@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
 @theme {
+  --font-family: "Roboto Mono";
   --color-black: #121c2f;
+  --color-white: #ffffff;
+  --color-yellow: #fef970;
+  --color-blue: #5a88f9;
+  --color-lightblue: #9decff;
 }
