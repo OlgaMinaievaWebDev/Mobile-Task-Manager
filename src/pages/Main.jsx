@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import TaskList from "../components/TaskList";
 
 function Main() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Main() {
           Good{" "}
           {hours < 5
             ? "Night"
-            : hours < 12
+            : hours < 11
             ? "Morning"
             : hours < 18
             ? "Afternoon"
@@ -89,6 +90,10 @@ function Main() {
           ))}
         </div>
       </div>
+      <TaskList />
+      <button className="bg-blue text-white w-12 h-12 rounded-full flex items-center justify-center fixed bottom-8 left-[48%] shadow-lg" >
+        +
+      </button>
     </div>
   );
 }
