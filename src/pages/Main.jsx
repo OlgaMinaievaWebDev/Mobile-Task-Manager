@@ -91,7 +91,10 @@ function Main() {
         </div>
       </div>
       <TaskList />
-      <button className="bg-blue text-white w-12 h-12 rounded-full flex items-center justify-center fixed bottom-8 left-[48%] shadow-lg" >
+      <button
+        onClick={() => navigate("/addTask")}
+        className="bg-blue text-lg text-white w-16 h-16 rounded-full flex items-center justify-center fixed bottom-8 right-8 shadow-lg"
+      >
         +
       </button>
     </div>
