@@ -2,14 +2,30 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Main() {
   const navigate = useNavigate();
+  const date = new Date();
+  const hours = date.getHours();
+  const today =
+    date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+  const weekday = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const day = weekday[date.getDay()];
   return (
     <div className="bg-black font-family text-white w-full h-screen">
       <div className="flex flex-col p-3 gap-3">
-        <h1 className="text-6xl text-blue ">Good Morning</h1>
+        <h1 className="text-6xl text-blue ">
+          Good {hours < 12 ? "Morning" : "Evening"}
+        </h1>
         <div className="flex justify-between">
           <div>
-            <p className="text-lg">Today's Monday</p>
-            <p className="text-sm opacity-50">Feb 12, 2025</p>
+            <p className="text-lg">Today's {day} </p>
+            <p className="text-sm opacity-50">{today}</p>
           </div>
           <div>
             <p className="text-lg text-right">75% Done</p>
