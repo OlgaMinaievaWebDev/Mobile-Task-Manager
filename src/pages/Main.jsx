@@ -20,8 +20,8 @@ function Main() {
   const todayDay = new Date().toLocaleString("en-US", { weekday: "long" });
   return (
     <div className="bg-black font-family text-white w-full h-screen">
-      <div className="flex flex-col p-4 gap-3">
-        <h1 className="text-6xl text-blue mb-3 ">
+      <div className="flex flex-col p-8 gap-3">
+        <h1 className="text-6xl text-blue mb-3">
           Good{" "}
           {hours < 5
             ? "Night"
