@@ -6,7 +6,8 @@ function TaskList() {
     <div>
       {state.tasks.map((task) => (
         <div key={task.id}>
-          <p>{task.name}</p>;<p>{task.created}</p>
+          <p>{task.name}</p>
+          <p>{task.created}</p>
         </div>
       ))}
     </div>

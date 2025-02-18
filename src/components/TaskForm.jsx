@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTaskContext } from "../context/TaskContext";
-
+import Boards from "../pages/Boards";
 function TaskForm() {
   const navigate = useNavigate();
   const { state, dispatch } = useTaskContext();
@@ -13,7 +13,7 @@ function TaskForm() {
     e.preventDefault();
     dispatch({
       type: "ADD_TASK",
-      payload: { id: Date.now(), name: taskName, description },
+      payload: { id: Date.now(), name: taskName, description, created },
     });
 
     navigate("/");
@@ -33,13 +33,7 @@ function TaskForm() {
         </h2>
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <label>Select Board</label>
-          <select>
-            <option value="" disabled>
-              --Choose Board--
-            </option>
-            <option value="new">Create New</option>
-          </select>
+          <Boards />
           <div>
             <label htmlFor="task name">Enter Task </label>
             <input

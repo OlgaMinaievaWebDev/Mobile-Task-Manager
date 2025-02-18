@@ -11,6 +11,8 @@ function taskReducer(state, action) {
   switch (action.type) {
     case "ADD_TASK":
       return { ...state, tasks: [...state.tasks, action.payload] };
+    case "ADD_NEW_BOARD":
+      return { ...state, boards: [...state.boards, action.payload] };
     default:
       return state;
   }
