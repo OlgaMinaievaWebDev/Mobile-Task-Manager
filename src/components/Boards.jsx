@@ -3,36 +3,45 @@ import { useTaskContext } from "../context/TaskContext";
 
 function Boards() {
   const { state, dispatch } = useTaskContext();
-  const [selectedBoard, setSelectedBoard] = useState("");
   const [newBoard, setNewBoard] = useState("");
 
+  function handleBoardSelection(e) {
+    dispatch({ type: "SET_SELECTED_BOARD", payload: e.target.value });
+  }
+
   function addNewBoard() {
+    if (!newBoard.trim()) return;
     dispatch({ type: "ADD_NEW_BOARD", payload: newBoard });
+    dispatch({ type: "SET_SELECTED_BOARD", payload: newBoard });
+    setNewBoard("");
   }
 
   return (
     <div>
       <label htmlFor="boards">Select Board</label>
       <select
-        value={selectedBoard}
-        onChange={(e) => {
-          setSelectedBoard(e.target.value);
-          setNewBoard(""); // Reset new board input if selecting existing one
-        }}
+        value={state.selectedBoard}
+        onChange={handleBoardSelection}
         className="w-full p-2 rounded-xl border border-gray-600 text-white"
         required
       >
         <option value="" disabled>
           -- Choose Board --
         </option>
-        {state.boards.map((board) => (
-          <option key={board} value={board}>
-            {board}
+        {state.boards.length > 0 ? (
+          state.boards.map((board, index) => (
+            <option key={index} value={board}>
+              {board}
+            </option>
+          ))
+        ) : (
+          <option value="" disabled>
+            No Boards available
           </option>
-        ))}
+        )}
         <option value="new">Create New</option>
       </select>
-      {selectedBoard === "new" && (
+      {state.selectedBoard === "new" && (
         <input
           type="text"
           placeholder="Enter new board name"
@@ -42,6 +51,12 @@ function Boards() {
           required
         />
       )}
+      <button
+        onClick={addNewBoard}
+        className="bg-blue text-white px-4 py-2 rounded-lg mt-2"
+      >
+        Add Board
+      </button>
     </div>
   );
 }

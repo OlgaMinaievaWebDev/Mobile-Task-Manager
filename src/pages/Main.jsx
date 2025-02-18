@@ -23,7 +23,7 @@ function Main() {
         </h1>
         <div className="flex justify-between">
           <div>
-            <p className="text-lg">Today's {weekday} </p>
+            <p className="text-lg">Today&apos;s {weekday} </p>
             <p className="text-sm opacity-50">{today}</p>
           </div>
           <div>

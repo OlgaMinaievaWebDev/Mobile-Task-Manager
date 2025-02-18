@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTaskContext } from "../context/TaskContext";
 import Boards from "../components/Boards";
+
 function TaskForm() {
   const navigate = useNavigate();
   const { state, dispatch } = useTaskContext();
@@ -11,6 +12,8 @@ function TaskForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!state.selectedBoard) return;
+
     dispatch({
       type: "ADD_TASK",
       payload: {

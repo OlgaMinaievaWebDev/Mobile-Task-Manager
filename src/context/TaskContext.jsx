@@ -4,7 +4,8 @@ const TaskContext = createContext();
 
 const initialState = {
   tasks: [],
-  boards: ["Personal", "Work", "ToDo", "Family", "Hobby"], //Default Boards
+  boards: [], //Default Boards
+  selectedBoard: "",
 };
 
 function taskReducer(state, action) {
@@ -13,6 +14,8 @@ function taskReducer(state, action) {
       return { ...state, tasks: [...state.tasks, action.payload] };
     case "ADD_NEW_BOARD":
       return { ...state, boards: [...state.boards, action.payload] };
+    case "SET_SELECTED_BOARD":
+      return { ...state, selectedBoard: action.payload };
     default:
       return state;
   }
