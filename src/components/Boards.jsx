@@ -53,7 +53,7 @@ function Boards() {
       )}
       <button
         onClick={addNewBoard}
-        className="bg-blue text-white px-4 py-2 rounded-lg mt-2"
+        className=" text-white px-4 py-2 rounded-lg mt-2 border border-blue"
       >
         Add Board
       </button>

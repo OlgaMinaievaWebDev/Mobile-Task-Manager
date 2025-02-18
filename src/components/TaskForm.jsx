@@ -21,6 +21,7 @@ function TaskForm() {
         name: taskName,
         description,
         created,
+        board: state.selectedBoard,
       },
     });
 

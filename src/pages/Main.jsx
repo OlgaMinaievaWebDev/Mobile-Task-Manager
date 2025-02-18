@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import TaskList from "../components/TaskList";
+import Filters from "../components/Filters";
 
 function Main() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ function Main() {
           +
         </button>
       </div>
-      <TaskList />
+      <Filters />
     </div>
   );
 }
