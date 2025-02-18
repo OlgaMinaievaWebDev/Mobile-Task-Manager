@@ -1,7 +1,19 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTaskContext } from "../context/TaskContext";
 
 function TaskForm() {
   const navigate = useNavigate();
+  const { state, dispatch } = useTaskContext();
+  const [taskName, setTaskName] = useState("");
+  const [description, setDescription] = useState("");
+  const [created, setCreated] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(taskName, description, created);
+  }
+
   return (
     <div className="bg-black text-white w-full h-screen font-family p-8">
       <button
@@ -15,7 +27,7 @@ function TaskForm() {
           Create Your Task
         </h2>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <label>Select Board</label>
           <select>
             <option value="" disabled>
@@ -29,6 +41,8 @@ function TaskForm() {
               type="text"
               placeholder="Enter task name"
               className="w-full p-2 rounded-xl border border-gray-600  text-white mt-1"
+              value={taskName}
+              onChange={(e) => setTaskName(e.target.value)}
               required
             />
           </div>
@@ -37,12 +51,20 @@ function TaskForm() {
             <textarea
               className="rounded-xl w-full border border-gray-600 mt-1 resize-none"
               placeholder="Add additional description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               required
             />
           </div>
           <div>
             <label htmlFor="date">Created</label>
-            <input type="date" className="opacity-60 block mt-1" />
+            <input
+              type="date"
+              className="opacity-60 block mt-1"
+              value={created}
+              onChange={(e) => setCreated(e.target.value)}
+              required
+            />
           </div>
           <button
             type="submit"
