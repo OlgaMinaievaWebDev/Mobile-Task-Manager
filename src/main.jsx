@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
-import Boards from "./pages/Boards.jsx";
+import Boards from "./components/Boards.jsx";
 import TaskDetails from "./pages/TaskDetails.jsx";
 import TaskForm from "./components/TaskForm.jsx";
 import { TaskProvider } from "./context/TaskContext.jsx";

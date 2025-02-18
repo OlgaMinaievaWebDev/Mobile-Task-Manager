@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTaskContext } from "../context/TaskContext";
-import Boards from "../pages/Boards";
+import Boards from "../components/Boards";
 function TaskForm() {
   const navigate = useNavigate();
   const { state, dispatch } = useTaskContext();
@@ -13,7 +13,12 @@ function TaskForm() {
     e.preventDefault();
     dispatch({
       type: "ADD_TASK",
-      payload: { id: Date.now(), name: taskName, description, created },
+      payload: {
+        id: Date.now(),
+        name: taskName,
+        description,
+        created,
+      },
     });
 
     navigate("/");
@@ -35,8 +40,9 @@ function TaskForm() {
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <Boards />
           <div>
-            <label htmlFor="task name">Enter Task </label>
+            <label htmlFor="task">Enter Task</label>
             <input
+              name="task"
               type="text"
               placeholder="Enter task name"
               className="w-full p-2 rounded-xl border border-gray-600  text-white mt-1"
@@ -48,6 +54,7 @@ function TaskForm() {
           <div>
             <label htmlFor="description">Add Description</label>
             <textarea
+              name="description"
               className="rounded-xl w-full border border-gray-600 mt-1 resize-none"
               placeholder="Add additional description"
               value={description}
