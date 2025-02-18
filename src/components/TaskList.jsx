@@ -1,5 +1,16 @@
+import { useTaskContext } from "../context/TaskContext";
+
 function TaskList() {
-  return <div>TaskList</div>;
+  const { state } = useTaskContext();
+  return (
+    <div>
+      {state.tasks.map((task) => (
+        <div key={task.id}>
+          <p>{task.name}</p>;<p>{task.created}</p>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default TaskList;

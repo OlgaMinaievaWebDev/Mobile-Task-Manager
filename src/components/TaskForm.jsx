@@ -11,7 +11,12 @@ function TaskForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(taskName, description, created);
+    dispatch({
+      type: "ADD_TASK",
+      payload: { id: Date.now(), name: taskName, description },
+    });
+
+    navigate("/");
   }
 
   return (
@@ -53,7 +58,6 @@ function TaskForm() {
               placeholder="Add additional description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              required
             />
           </div>
           <div>
