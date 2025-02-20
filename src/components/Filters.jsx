@@ -5,7 +5,7 @@ import { useTaskContext } from "../context/TaskContext";
 
 function Filters() {
   const { state } = useTaskContext();
-  const [selectedTab, setSelectedTab] = useState("tasks"); // ✅ Use one state instead of two
+  const [selectedTab, setSelectedTab] = useState("tasks");
 
   return (
     <>
@@ -14,15 +14,17 @@ function Filters() {
         <div className="flex items-center gap-1.5">
           <button
             className={`rounded-full w-10 h-10 p-2 border border-white ${
-              selectedTab === "tasks" ? "bg-blue text-white border-none" : ""
+              selectedTab === "tasks"
+                ? "bg-lightblue text-black border-none"
+                : ""
             }`}
           >
             {state.tasks.length} {/* ✅ Dynamic task count */}
           </button>
           <p
-            onClick={() => setSelectedTab("tasks")} // ✅ Use single state
+            onClick={() => setSelectedTab("tasks")}
             className={`text-2xl cursor-pointer ${
-              selectedTab === "tasks" ? "text-yellow" : ""
+              selectedTab === "tasks" ? "text-lightblue" : ""
             }`}
           >
             Tasks
@@ -33,13 +35,13 @@ function Filters() {
         <div className="flex items-center gap-1.5">
           <button
             className={`rounded-full w-10 h-10 p-2 border border-white ${
-              selectedTab === "boards" ? "bg-blue text-white border-none" : ""
+              selectedTab === "boards" ? "bg-yellow text-black border-none" : ""
             }`}
           >
             {state.boards.length} {/* ✅ Dynamic board count */}
           </button>
           <p
-            onClick={() => setSelectedTab("boards")} // ✅ Use single state
+            onClick={() => setSelectedTab("boards")}
             className={`text-2xl cursor-pointer ${
               selectedTab === "boards" ? "text-yellow" : ""
             }`}
@@ -62,13 +64,28 @@ function Filters() {
 
       {/* ✅ Show Boards if "Boards" tab is active */}
       {selectedTab === "boards" && (
-        <>
+        <div className="px-8">
           {state.boards.length === 0 ? (
             <p className="text-center text-gray-400">You have 0 boards</p>
           ) : (
-            <Boards />
+            state.boards.map((board) => {
+              const taskCount = state.tasks.filter(
+                (task) => task.board === board
+              ).length;
+
+              return (
+                // ✅ Added return statement inside map()
+                <div
+                  key={board}
+                  className="p-3 mb-2 bg-yellow text-black rounded-3xl h-25 flex flex-col justify-center shadow-lg"
+                >
+                  <p className="font-bold">{board}</p>
+                  <p>{taskCount} Active Tasks</p>
+                </div>
+              );
+            })
           )}
-        </>
+        </div>
       )}
     </>
   );
