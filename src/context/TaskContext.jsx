@@ -16,6 +16,18 @@ function taskReducer(state, action) {
       return { ...state, boards: [...state.boards, action.payload] };
     case "SET_SELECTED_BOARD":
       return { ...state, selectedBoard: action.payload };
+    case "TASK_COMPLETE":
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload ? { ...task, done: !task.done } : task
+        ),
+      };
+    case "DELETE_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.id !== task.id),
+      };
     default:
       return state;
   }

@@ -22,6 +22,7 @@ function TaskForm() {
         description,
         created,
         board: state.selectedBoard,
+        done: false,
       },
     });
 
