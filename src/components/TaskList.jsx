@@ -33,7 +33,11 @@ function TaskList() {
               <FaEdit />
             </button>
             <button>
-              <FaDeleteLeft />
+              <FaDeleteLeft
+                onClick={() =>
+                  dispatch({ type: "DELETE_TASK", payload: task.id })
+                }
+              />
             </button>
           </div>
         </div>
