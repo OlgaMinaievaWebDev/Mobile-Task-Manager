@@ -4,10 +4,11 @@ import { FaRegCircle } from "react-icons/fa";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function TaskList() {
   const { state, dispatch } = useTaskContext();
-
+  const navigate = useNavigate();
   return (
     <div className="px-8">
       {state.tasks.map((task) => (
@@ -30,7 +31,7 @@ function TaskList() {
               {task.done ? <FaRegCheckCircle /> : <FaRegCircle />}
             </button>
             <button>
-              <FaEdit />
+              <FaEdit onClick={() => navigate("/task/:id")} />
             </button>
             <button>
               <FaDeleteLeft
