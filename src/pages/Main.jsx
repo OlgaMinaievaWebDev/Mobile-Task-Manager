@@ -10,7 +10,7 @@ function Main() {
   const weekday = date.toLocaleString("en-US", { weekday: "long" });
 
   return (
-    <div className="bg-black font-family text-white w-full h-screen">
+    <div className="bg-black font-family text-white w-full h-screen md:max-w-md mx-auto md:rounded-3xl md:shadow-lg md:h-auto">
       <div className="flex flex-col p-8 gap-3">
         <h1 className="text-6xl text-blue mb-3">
           Good{" "}

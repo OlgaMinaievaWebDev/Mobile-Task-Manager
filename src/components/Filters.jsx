@@ -9,7 +9,7 @@ function Filters() {
 
   return (
     <>
-      <div className="flex justify-between p-8">
+      <div className="flex justify-between p-8 ">
         {/* Tasks Tab */}
         <div className="flex items-center gap-1.5">
           <button

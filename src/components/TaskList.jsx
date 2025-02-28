@@ -9,7 +9,7 @@ function TaskList() {
   const { state, dispatch } = useTaskContext();
   const navigate = useNavigate();
   return (
-    <div className="px-8">
+    <div className="px-8 py-4">
       {state.tasks.map((task) => (
         <div
           key={task.id}
