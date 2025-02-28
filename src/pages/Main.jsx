@@ -35,7 +35,7 @@ function Main() {
 
         <button
           onClick={() => navigate("/addTask")}
-          className="fixed bottom-8 right-8 bg-blue text-lg text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
+          className="fixed bottom-8 right-8 bg-blue text-lg text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg md:fixed md:top-6 md:right-50"
         >
           +
         </button>

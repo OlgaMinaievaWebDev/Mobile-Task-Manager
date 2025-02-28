@@ -30,7 +30,7 @@ function TaskForm() {
   }
 
   return (
-    <div className="bg-black text-white w-full h-screen font-family p-8">
+    <div className="bg-black text-white w-full h-screen font-family p-8 md:max-w-md mx-auto md:rounded-3xl md:shadow-lg md:h-auto">
       <button
         className="rounded-xl border border-yellow py-2 px-4 ml-2"
         onClick={() => navigate("/")}
