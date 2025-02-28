@@ -1,13 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import TaskList from "../components/TaskList";
+import { useTaskContext } from "../context/TaskContext";
 import Filters from "../components/Filters";
 
 function Main() {
   const navigate = useNavigate();
+  const { state } = useTaskContext();
   const date = new Date();
   const hours = date.getHours();
   const today = date.toLocaleDateString();
   const weekday = date.toLocaleString("en-US", { weekday: "long" });
+
+  // Calculate completed tasks percentage
+  const totalTasks = state.tasks.length;
+  const completedTasks = state.tasks.filter((task) => task.done).length;
+  const completionPercentage =
+    totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
   return (
     <div className="bg-black font-family text-white w-full h-screen md:max-w-md mx-auto md:rounded-3xl md:shadow-lg md:h-auto">
@@ -28,7 +35,7 @@ function Main() {
             <p className="text-sm opacity-50">{today}</p>
           </div>
           <div>
-            <p className="text-lg text-right">% Done</p>
+            <p className="text-lg text-right">{completionPercentage}% Done</p>
             <p className="text-sm opacity-50">Completed Tasks</p>
           </div>
         </div>
@@ -44,4 +51,5 @@ function Main() {
     </div>
   );
 }
+
 export default Main;

@@ -19,7 +19,7 @@ function Filters() {
                 : ""
             }`}
           >
-            {state.tasks.length} {/* ✅ Dynamic task count */}
+            {state.tasks.length} {/* Dynamic task count */}
           </button>
           <p
             onClick={() => setSelectedTab("tasks")}
@@ -38,7 +38,7 @@ function Filters() {
               selectedTab === "boards" ? "bg-yellow text-black border-none" : ""
             }`}
           >
-            {state.boards.length} {/* ✅ Dynamic board count */}
+            {state.boards.length} {/* Dynamic board count */}
           </button>
           <p
             onClick={() => setSelectedTab("boards")}
@@ -51,7 +51,7 @@ function Filters() {
         </div>
       </div>
 
-      {/* ✅ Show Tasks if "Tasks" tab is active */}
+      {/* Show Tasks if "Tasks" tab is active */}
       {selectedTab === "tasks" && (
         <>
           {state.tasks.length === 0 ? (
@@ -62,7 +62,7 @@ function Filters() {
         </>
       )}
 
-      {/* ✅ Show Boards if "Boards" tab is active */}
+      {/* Show Boards if "Boards" tab is active */}
       {selectedTab === "boards" && (
         <div className="px-8 md:py-4">
           {state.boards.length === 0 ? (
@@ -74,7 +74,6 @@ function Filters() {
               ).length;
 
               return (
-                // ✅ Added return statement inside map()
                 <div
                   key={board}
                   className="p-3 mb-2 bg-yellow text-black rounded-3xl h-25 flex flex-col justify-center shadow-lg"

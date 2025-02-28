@@ -23,9 +23,26 @@ function taskReducer(state, action) {
         ),
       };
     case "DELETE_TASK":
+      // Find the task being deleted
+      const deletedTask = state.tasks.find(
+        (task) => task.id === action.payload
+      );
+      // Filter out the deleted task
+      const updatedTasks = state.tasks.filter(
+        (task) => task.id !== action.payload
+      );
+      // Check if the board associated with the deleted task has any remaining tasks
+      const boardHasTasks = updatedTasks.some(
+        (task) => task.board === deletedTask.board
+      );
+      // If the board has no tasks, remove it from the boards array
+      const updatedBoards = boardHasTasks
+        ? state.boards
+        : state.boards.filter((board) => board !== deletedTask.board);
       return {
         ...state,
-        tasks: state.tasks.filter((task) => task.id !== action.payload),
+        tasks: updatedTasks,
+        boards: updatedBoards,
       };
     default:
       return state;
@@ -38,7 +55,7 @@ export function TaskProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(state.tasks));
     localStorage.setItem("boards", JSON.stringify(state.boards));
-  localStorage.setItem("selectedBoard", state.selectedBoard); 
+    localStorage.setItem("selectedBoard", state.selectedBoard);
   }, [state.tasks, state.boards, state.selectedBoard]);
 
   return (

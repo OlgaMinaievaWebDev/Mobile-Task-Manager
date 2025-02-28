@@ -8,6 +8,12 @@ import { useNavigate } from "react-router-dom";
 function TaskList() {
   const { state, dispatch } = useTaskContext();
   const navigate = useNavigate();
+
+  // Function to handle task deletion
+  const handleDeleteTask = (id) => {
+    dispatch({ type: "DELETE_TASK", payload: id });
+  };
+
   return (
     <div className="px-8 py-4">
       {state.tasks.map((task) => (
@@ -18,10 +24,10 @@ function TaskList() {
           } text-black rounded-3xl h-25 flex flex-col justify-center shadow-lg`}
         >
           <h3 className="text-lg font-bold">{task.name}</h3>
-          <p className="text-sm text-gray-400">Board: {task.board}</p>{" "}
-          {/* ✅ Show board name */}
+          <p className="text-sm text-gray-400">Board: {task.board}</p>
           <p className="text-sm opacity-60">Created: {task.created || "N/A"}</p>
           <div className="flex justify-end align-baseline gap-3">
+            {/* Toggle task completion */}
             <button
               onClick={() =>
                 dispatch({ type: "TASK_COMPLETE", payload: task.id })
@@ -29,15 +35,15 @@ function TaskList() {
             >
               {task.done ? <FaRegCheckCircle /> : <FaRegCircle />}
             </button>
-            <button>
-              <FaEdit onClick={() => navigate("/task/:id")} />
+
+            {/* Edit task */}
+            <button onClick={() => navigate(`/task/${task.id}`)}>
+              <FaEdit />
             </button>
-            <button>
-              <FaDeleteLeft
-                onClick={() =>
-                  dispatch({ type: "DELETE_TASK", payload: task.id })
-                }
-              />
+
+            {/* Delete task */}
+            <button onClick={() => handleDeleteTask(task.id)}>
+              <FaDeleteLeft />
             </button>
           </div>
         </div>
