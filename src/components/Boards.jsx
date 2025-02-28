@@ -6,13 +6,14 @@ function Boards() {
   const [newBoard, setNewBoard] = useState("");
 
   function handleBoardSelection(e) {
-    dispatch({ type: "SET_SELECTED_BOARD", payload: e.target.value });
+    const selectedValue = e.target.value;
+    dispatch({ type: "SET_SELECTED_BOARD", payload: selectedValue }); // Ensure payload is a string
   }
 
   function addNewBoard() {
-    if (!newBoard.trim()) return;
-    dispatch({ type: "ADD_BOARD", payload: newBoard });
-     dispatch({ type: "SET_SELECTED_BOARD", payload: newBoard }); 
+    if (!newBoard.trim()) return; // Prevent empty board names
+    dispatch({ type: "ADD_BOARD", payload: newBoard }); // Add new board
+    dispatch({ type: "SET_SELECTED_BOARD", payload: newBoard }); // Set the new board as selected
     setNewBoard(""); // Reset input after adding the board
   }
 

@@ -4,7 +4,7 @@ const TaskContext = createContext();
 const initialState = {
   tasks: JSON.parse(localStorage.getItem("tasks")) || [],
   boards: JSON.parse(localStorage.getItem("boards")) || [],
-  selectedBoard: JSON.parse(localStorage.getItem('boards')) || [],
+  selectedBoard: localStorage.getItem("selectedBoard") || "",
 };
 
 function taskReducer(state, action) {
@@ -38,7 +38,7 @@ export function TaskProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(state.tasks));
     localStorage.setItem("boards", JSON.stringify(state.boards));
-    localStorage.setItem("selectedBoard", state.selectedBoard);
+  localStorage.setItem("selectedBoard", state.selectedBoard); 
   }, [state.tasks, state.boards, state.selectedBoard]);
 
   return (
