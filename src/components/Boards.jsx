@@ -11,9 +11,9 @@ function Boards() {
 
   function addNewBoard() {
     if (!newBoard.trim()) return;
-    dispatch({ type: "ADD_NEW_BOARD", payload: newBoard });
-    dispatch({ type: "SET_SELECTED_BOARD", payload: newBoard });
-    setNewBoard("");
+    dispatch({ type: "ADD_BOARD", payload: newBoard });
+     dispatch({ type: "SET_SELECTED_BOARD", payload: newBoard }); 
+    setNewBoard(""); // Reset input after adding the board
   }
 
   return (
@@ -41,22 +41,25 @@ function Boards() {
         )}
         <option value="new">Create New</option>
       </select>
+
       {state.selectedBoard === "new" && (
-        <input
-          type="text"
-          placeholder="Enter new board name"
-          className="w-full p-2 mt-2 rounded-xl border border-gray-600 text-white"
-          value={newBoard}
-          onChange={(e) => setNewBoard(e.target.value)}
-          required
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="Enter new board name"
+            className="w-full p-2 mt-2 rounded-xl border border-gray-600 text-white"
+            value={newBoard}
+            onChange={(e) => setNewBoard(e.target.value)}
+            required
+          />
+          <button
+            onClick={addNewBoard}
+            className="text-white px-4 py-2 rounded-lg mt-2 border border-blue"
+          >
+            Add Board
+          </button>
+        </div>
       )}
-      <button
-        onClick={addNewBoard}
-        className=" text-white px-4 py-2 rounded-lg mt-2 border border-blue"
-      >
-        Add Board
-      </button>
     </div>
   );
 }

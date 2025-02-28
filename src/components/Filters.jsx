@@ -64,7 +64,7 @@ function Filters() {
 
       {/* ✅ Show Boards if "Boards" tab is active */}
       {selectedTab === "boards" && (
-        <div className="px-8">
+        <div className="px-8 md:py-4">
           {state.boards.length === 0 ? (
             <p className="text-center text-gray-400">You have 0 boards</p>
           ) : (

@@ -1,18 +1,17 @@
-import { createContext, useContext, useReducer } from "react";
-
+import { useEffect, useReducer, createContext, useContext } from "react";
 const TaskContext = createContext();
 
 const initialState = {
-  tasks: [],
-  boards: [], //Default Boards
-  selectedBoard: "",
+  tasks: JSON.parse(localStorage.getItem("tasks")) || [],
+  boards: JSON.parse(localStorage.getItem("boards")) || [],
+  selectedBoard: JSON.parse(localStorage.getItem('boards')) || [],
 };
 
 function taskReducer(state, action) {
   switch (action.type) {
     case "ADD_TASK":
       return { ...state, tasks: [...state.tasks, action.payload] };
-    case "ADD_NEW_BOARD":
+    case "ADD_BOARD":
       return { ...state, boards: [...state.boards, action.payload] };
     case "SET_SELECTED_BOARD":
       return { ...state, selectedBoard: action.payload };
@@ -36,12 +35,19 @@ function taskReducer(state, action) {
 export function TaskProvider({ children }) {
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    localStorage.setItem("boards", JSON.stringify(state.boards));
+    localStorage.setItem("selectedBoard", state.selectedBoard);
+  }, [state.tasks, state.boards, state.selectedBoard]);
+
   return (
     <TaskContext.Provider value={{ state, dispatch }}>
       {children}
     </TaskContext.Provider>
   );
 }
+
 export function useTaskContext() {
   return useContext(TaskContext);
 }
