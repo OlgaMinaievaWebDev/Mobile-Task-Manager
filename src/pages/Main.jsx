@@ -4,7 +4,7 @@ import Filters from "../components/Filters";
 
 function Main() {
   const navigate = useNavigate();
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const date = new Date();
   const hours = date.getHours();
   const today = date.toLocaleDateString();
@@ -16,6 +16,11 @@ function Main() {
   const completionPercentage =
     totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
+  const handleDeleteAll = () => {
+  if (window.confirm("Are you sure you want to delete all tasks?")) {
+    dispatch({ type: "DELETE_ALL" });
+  }
+};
   return (
     <div className="bg-black font-family text-white w-full h-screen md:max-w-md mx-auto md:rounded-3xl md:shadow-lg md:h-auto md:mt-4 relative pb-20">
       <div className="flex flex-col p-8 gap-3">
@@ -39,6 +44,16 @@ function Main() {
             <p className="text-sm opacity-50">Completed Tasks</p>
           </div>
         </div>
+
+        {/*Delete all tasks button*/}
+        {state.tasks.length > 0 && (
+          <button
+            onClick={handleDeleteAll}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg mt-4"
+          >
+            Delete All Tasks
+          </button>
+        )}
 
         {/* Fixed Button for Mobile, Inside Container for Medium Screens */}
         <button

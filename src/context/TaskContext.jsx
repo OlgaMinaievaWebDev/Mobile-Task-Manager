@@ -44,6 +44,8 @@ function taskReducer(state, action) {
         tasks: updatedTasks,
         boards: updatedBoards,
       };
+    case "DELETE_ALL":
+      return { ...state, tasks: [], boards: [], selectedBoard: [] }; // Clear all tasks and boards
     default:
       return state;
   }
