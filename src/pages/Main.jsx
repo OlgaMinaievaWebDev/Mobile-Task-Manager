@@ -17,7 +17,7 @@ function Main() {
     totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
   return (
-    <div className="bg-black font-family text-white w-full h-screen md:max-w-md mx-auto md:rounded-3xl md:shadow-lg md:h-auto">
+    <div className="bg-black font-family text-white w-full h-screen md:max-w-md mx-auto md:rounded-3xl md:shadow-lg md:h-auto md:mt-4 relative pb-20">
       <div className="flex flex-col p-8 gap-3">
         <h1 className="text-6xl text-blue mb-3">
           Good{" "}
@@ -40,9 +40,10 @@ function Main() {
           </div>
         </div>
 
+        {/* Fixed Button for Mobile, Inside Container for Medium Screens */}
         <button
           onClick={() => navigate("/addTask")}
-          className="fixed bottom-8 right-8 bg-blue text-lg text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg md:fixed md:top-6 md:right-50"
+          className="fixed bottom-20 right-8 bg-blue text-lg text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg md:absolute md:bottom-8 md:right-8"
         >
           +
         </button>
