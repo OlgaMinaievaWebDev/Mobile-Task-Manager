@@ -87,13 +87,7 @@ function Filters() {
             <p className="text-center text-gray-400">You have 0 boards</p>
           ) : (
             <>
-              {/* Add a "Show All Tasks" button */}
-              <button
-                onClick={showAllTasks}
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 hover:bg-blue-600 transition-colors"
-              >
-                Show All Tasks
-              </button>
+            
               {state.boards.map((board) => {
                 const taskCount = state.tasks.filter(
                   (task) => task.board === board
@@ -103,13 +97,12 @@ function Filters() {
                 return (
                   <div
                     key={board}
-                    className="p-3 mb-4 bg-yellow text-black rounded-3xl flex flex-col justify-center shadow-lg"
+                    className="p-3 mb-4 bg-yellow-100 text-gray-800 rounded-3xl flex flex-col justify-center shadow-lg"
                   >
                     <div className="flex justify-between items-center">
                       <p className="font-bold text-xl">{board}</p>
                       <p className="text-sm">{taskCount} Active Tasks</p>
                     </div>
-                    {/* Add a delete board button */}
                     <div className="flex justify-end gap-2 mt-2">
                       <button
                         onClick={() => handleDeleteBoard(board)}
@@ -117,10 +110,9 @@ function Filters() {
                       >
                         <FaTrash /> Delete Board
                       </button>
-                      {/* Add a show/hide tasks button */}
                       <button
                         onClick={() => toggleBoardVisibility(board)}
-                        className="text-black px-3 py-1 rounded-lg bg-lightblue hover:bg-lightblue-600 transition-colors flex items-center gap-1"
+                        className="text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-1"
                       >
                         {isVisible ? <FaEyeSlash /> : <FaEye />}
                         {isVisible ? "Hide Tasks" : "Show Tasks"}

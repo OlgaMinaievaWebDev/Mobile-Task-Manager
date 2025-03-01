@@ -1,11 +1,5 @@
 import { useTaskContext } from "../context/TaskContext";
-
-import {
-  FaRegCircle,
-  FaRegCheckCircle,
-  FaEdit,
-  FaTrash,
-} from "react-icons/fa";
+import { FaRegCircle, FaRegCheckCircle, FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function TaskList() {
@@ -22,44 +16,44 @@ function TaskList() {
       {state.tasks.map((task) => (
         <div
           key={task.id}
-          className={`p-3 mb-2 ${
-            task.done ? "bg-green-300" : "bg-lightblue"
-          } text-black rounded-3xl flex flex-col justify-center shadow-lg`}
+          className={`p-3 mb-4 ${
+            task.done ? "bg-green-100" : "bg-blue-100"
+          } text-gray-800 rounded-3xl flex flex-col justify-center shadow-lg`}
         >
-          <h3 className="text-lg font-bold">{task.name}</h3>
-          <p className="text-sm text-gray-600">Board: {task.board}</p>
+          <div className="flex justify-between items-center">
+            <p className="font-bold text-xl">{task.name}</p>
+            <p className="text-sm">{task.board}</p>
+          </div>
           <p className="text-sm text-gray-600">
             Created: {task.created || "N/A"}
           </p>
-          <div className="flex justify-end gap-3 mt-2">
-            {/* Toggle task completion */}
+          <div className="flex justify-end gap-2 mt-2">
             <button
               onClick={() =>
                 dispatch({ type: "TASK_COMPLETE", payload: task.id })
               }
-              className="p-1 rounded-full hover:bg-white/10 transition-colors"
+              className="text-gray-800 px-3 py-1 rounded-lg hover:bg-white/10 transition-colors flex items-center gap-1"
             >
               {task.done ? (
                 <FaRegCheckCircle size={20} />
               ) : (
                 <FaRegCircle size={20} />
               )}
+              {task.done ? "Undo" : "Complete"}
             </button>
-
-            {/* Edit task */}
             <button
               onClick={() => navigate(`/task/${task.id}`)}
-              className="p-1 rounded-full hover:bg-white/10 transition-colors"
+              className="text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-1"
             >
               <FaEdit size={20} />
+              Edit
             </button>
-
-            {/* Delete task */}
             <button
               onClick={() => handleDeleteTask(task.id)}
-              className="p-1 rounded-full hover:bg-white/10 transition-colors"
+              className="text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-600 transition-colors flex items-center gap-1"
             >
-             <FaTrash size={20} />
+              <FaTrash size={20} />
+              Delete
             </button>
           </div>
         </div>
