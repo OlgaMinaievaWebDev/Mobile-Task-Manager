@@ -1,24 +1,30 @@
 import { useState } from "react";
 import TaskList from "./TaskList";
-import Boards from "./Boards";
 import { useTaskContext } from "../context/TaskContext";
+import { FaCheck, FaTrash, FaEye, FaEyeSlash } from "react-icons/fa"; // Import icons
 
 function Filters() {
   const { state, dispatch } = useTaskContext();
   const [selectedTab, setSelectedTab] = useState("tasks");
 
+  const handleDeleteBoard = (board) => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete board "${board}" and all its tasks?`
+      )
+    ) {
+      dispatch({ type: "DELETE_BOARD", payload: board });
+    }
+  };
 
- const handleDeleteBoard = (board) => {
-   if (
-     window.confirm(
-       `Are you sure you want to delete board "${board}" and all its tasks?`
-     )
-   ) {
-     dispatch({ type: "DELETE_BOARD", payload: board });
-   }
- };
+  const showAllTasks = () => {
+    dispatch({ type: "SHOW_ALL_TASKS" });
+  };
 
-  
+  const toggleBoardVisibility = (board) => {
+    dispatch({ type: "TOGGLE_BOARD_VISIBILITY", payload: board });
+  };
+
   return (
     <>
       <div className="flex justify-between p-8 ">
@@ -80,31 +86,91 @@ function Filters() {
           {state.boards.length === 0 ? (
             <p className="text-center text-gray-400">You have 0 boards</p>
           ) : (
-            state.boards.map((board) => {
-              const taskCount = state.tasks.filter(
-                (task) => task.board === board
-              ).length;
+            <>
+              {/* Add a "Show All Tasks" button */}
+              <button
+                onClick={showAllTasks}
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 hover:bg-blue-600 transition-colors"
+              >
+                Show All Tasks
+              </button>
+              {state.boards.map((board) => {
+                const taskCount = state.tasks.filter(
+                  (task) => task.board === board
+                ).length;
+                const isVisible = state.visibleBoards.includes(board);
 
-              return (
-                <div
-                  key={board}
-                  className="p-3 mb-2 bg-yellow text-black rounded-3xl h-25 flex flex-col justify-center shadow-lg"
-                >
-                  <p className="font-bold mt-2">{board}</p>
-                  <p>{taskCount} Active Tasks</p>
-                  {/* Add a delete board button */}
-                  <div className="flex justify-end gap-2">
-                    <button onClick={()=>handleDeleteBoard(board)} className="text-white bg-red-500 px-3 py-1 rounded-lg mt-2 mb-2 ">
-                      Delete Board
-                    </button>
-                    {/* Add a show all tasks button */}
-                    <button className="text-black px-3 py-1 rounded-lg mt-2 mb-2 bg-lightblue">
-                      Show Tasks
-                    </button>
+                return (
+                  <div
+                    key={board}
+                    className="p-3 mb-4 bg-yellow text-black rounded-3xl flex flex-col justify-center shadow-lg"
+                  >
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold text-xl">{board}</p>
+                      <p className="text-sm">{taskCount} Active Tasks</p>
+                    </div>
+                    {/* Add a delete board button */}
+                    <div className="flex justify-end gap-2 mt-2">
+                      <button
+                        onClick={() => handleDeleteBoard(board)}
+                        className="text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-600 transition-colors flex items-center gap-1"
+                      >
+                        <FaTrash /> Delete Board
+                      </button>
+                      {/* Add a show/hide tasks button */}
+                      <button
+                        onClick={() => toggleBoardVisibility(board)}
+                        className="text-black px-3 py-1 rounded-lg bg-lightblue hover:bg-lightblue-600 transition-colors flex items-center gap-1"
+                      >
+                        {isVisible ? <FaEyeSlash /> : <FaEye />}
+                        {isVisible ? "Hide Tasks" : "Show Tasks"}
+                      </button>
+                    </div>
+                    {/* Show tasks if the board is visible */}
+                    {isVisible && (
+                      <div className="mt-4 max-h-64 overflow-y-auto">
+                        {state.tasks
+                          .filter((task) => task.board === board)
+                          .map((task) => (
+                            <div
+                              key={task.id}
+                              className={`p-3 mb-2 rounded-lg ${
+                                task.done ? "bg-green-500" : "bg-gray-700"
+                              } text-white flex justify-between items-center`}
+                            >
+                              <span className="flex-1">{task.name}</span>
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() =>
+                                    dispatch({
+                                      type: "TASK_COMPLETE",
+                                      payload: task.id,
+                                    })
+                                  }
+                                  className="p-1 rounded-full hover:bg-white/10 transition-colors"
+                                >
+                                  <FaCheck />
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    dispatch({
+                                      type: "DELETE_TASK",
+                                      payload: task.id,
+                                    })
+                                  }
+                                  className="p-1 rounded-full hover:bg-white/10 transition-colors"
+                                >
+                                  <FaTrash />
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    )}
                   </div>
-                </div>
-              );
-            })
+                );
+              })}
+            </>
           )}
         </div>
       )}

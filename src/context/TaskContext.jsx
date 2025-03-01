@@ -5,6 +5,7 @@ const initialState = {
   tasks: JSON.parse(localStorage.getItem("tasks")) || [],
   boards: JSON.parse(localStorage.getItem("boards")) || [],
   selectedBoard: localStorage.getItem("selectedBoard") || [],
+  visibleBoards: [],
 };
 
 function taskReducer(state, action) {
@@ -52,6 +53,14 @@ function taskReducer(state, action) {
         boards: state.boards.filter((board) => board !== action.payload),
         tasks: state.tasks.filter((task) => task.board !== action.payload),
       };
+    case "TOGGLE_BOARD_VISIBILITY":
+      return {
+        ...state,
+        visibleBoards: state.visibleBoards.includes(action.payload)
+          ? state.visibleBoards.filter((board) => board !== action.payload) // Hide tasks
+          : [...state.visibleBoards, action.payload], // Show tasks
+      };
+
     default:
       return state;
   }
