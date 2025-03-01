@@ -78,8 +78,18 @@ function Filters() {
                   key={board}
                   className="p-3 mb-2 bg-yellow text-black rounded-3xl h-25 flex flex-col justify-center shadow-lg"
                 >
-                  <p className="font-bold">{board}</p>
+                  <p className="font-bold mt-2">{board}</p>
                   <p>{taskCount} Active Tasks</p>
+                  {/* Add a delete board button */}
+                  <div className="flex justify-end gap-2">
+                    <button className="text-white bg-red-500 px-3 py-1 rounded-lg mt-2 mb-2 ">
+                      Delete Board
+                    </button>
+                    {/* Add a show all tasks button */}
+                    <button className="text-black px-3 py-1 rounded-lg mt-2 mb-2 bg-lightblue">
+                      Show Tasks
+                    </button>
+                  </div>
                 </div>
               );
             })
