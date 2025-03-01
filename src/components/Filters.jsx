@@ -4,9 +4,21 @@ import Boards from "./Boards";
 import { useTaskContext } from "../context/TaskContext";
 
 function Filters() {
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const [selectedTab, setSelectedTab] = useState("tasks");
 
+
+ const handleDeleteBoard = (board) => {
+   if (
+     window.confirm(
+       `Are you sure you want to delete board "${board}" and all its tasks?`
+     )
+   ) {
+     dispatch({ type: "DELETE_BOARD", payload: board });
+   }
+ };
+
+  
   return (
     <>
       <div className="flex justify-between p-8 ">
@@ -82,7 +94,7 @@ function Filters() {
                   <p>{taskCount} Active Tasks</p>
                   {/* Add a delete board button */}
                   <div className="flex justify-end gap-2">
-                    <button className="text-white bg-red-500 px-3 py-1 rounded-lg mt-2 mb-2 ">
+                    <button onClick={()=>handleDeleteBoard(board)} className="text-white bg-red-500 px-3 py-1 rounded-lg mt-2 mb-2 ">
                       Delete Board
                     </button>
                     {/* Add a show all tasks button */}

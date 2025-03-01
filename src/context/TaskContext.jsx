@@ -46,6 +46,12 @@ function taskReducer(state, action) {
       };
     case "DELETE_ALL":
       return { ...state, tasks: [], boards: [], selectedBoard: [] }; // Clear all tasks and boards
+    case "DELETE_BOARD":
+      return {
+        ...state,
+        boards: state.boards.filter((board) => board !== action.payload),
+        tasks: state.tasks.filter((task) => task.board !== action.payload),
+      };
     default:
       return state;
   }

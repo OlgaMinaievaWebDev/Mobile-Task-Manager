@@ -20,7 +20,10 @@ function Main() {
   if (window.confirm("Are you sure you want to delete all tasks?")) {
     dispatch({ type: "DELETE_ALL" });
   }
-};
+  
+  };
+  
+  
   return (
     <div className="bg-black font-family text-white w-full h-screen md:max-w-md mx-auto md:rounded-3xl md:shadow-lg md:h-auto md:mt-4 relative pb-20">
       <div className="flex flex-col p-8 gap-3">
